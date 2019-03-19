@@ -36,15 +36,15 @@ find_package(GTest REQUIRED)
   ##############
   # Unit Tests
   ##############
-  add_executable(runUnitTests test1.cpp)
+  add_executable(basicTests basicTests.cpp)
 
   # Standard linking to gtest stuff.
-  target_link_libraries(runUnitTests GTest::GTest GTest::Main)
+  target_link_libraries(basicTests GTest::GTest GTest::Main)
 
   # Extra linking for the project.
-  target_link_libraries(runUnitTests neurallib)
+  target_link_libraries(basicTests neurallib)
 
   # This is so you can do 'make test' to see all your tests run, instead of
   # manually running the executable runUnitTests to see those specific tests.
-  add_test(NAME firstTest COMMAND runUnitTests)
+  add_test(NAME BasicTests COMMAND basicTests)
 

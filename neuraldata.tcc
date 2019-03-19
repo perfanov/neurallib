@@ -11,10 +11,11 @@ template<class ScalarType = double>
 class NeuralData
 {
 	private:
-		std::vector<int> _dimSizes;
+		std::vector<unsigned> _dimSizes;
 		std::vector<ScalarType> _buffer;
 
 	public:
+		NeuralData() = delete;
 		NeuralData(std::vector<unsigned> const & dimensionSizes)
 		{
 			assert(dimensionSizes.size() > 0);
@@ -27,7 +28,7 @@ class NeuralData
 			_dimSizes = dimensionSizes;
 			_buffer.resize(bufSize);
 		}
-		ScalarType const & operator()(std::vector<int> const & indeces)
+		ScalarType & operator()(std::vector<int> const & indeces)
 		{
 			assert(indeces.size() == _dimSizes.size());
 
@@ -40,7 +41,7 @@ class NeuralData
 			// So, the 0th dimension has a step of 1, dim1 has a step of (dim0 size), etc.
 			for(; index != indeces.cend(); ++index)
 			{
-				assert(index < dimSize);
+				assert(*index < *dimSize);
 				offset += (*index) * offsetStep;
 				offsetStep *= *dimSize;
 				++dimSize;
