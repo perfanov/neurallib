@@ -4,6 +4,8 @@
 	It's probably a good idea to template this on the container type; and figure out how to specialize for batch data retrieval
 */
 
+#pragma once
+
 #include<vector>
 #include<assert.h>
 
