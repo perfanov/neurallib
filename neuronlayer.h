@@ -31,8 +31,8 @@ class NeuronLayer
 		// Returns the gradient operator for the next layer.
 		//virtual std::packaged_task<NeuralData<ScalarType>(NeuralData<ScalarType> const &)> & requiredGradient() const = 0;
 
-		void attachInput(std::shared_ptr<NeuronLayer<ScalarType>> const & otherLayer) final { _attachedInputLayers.push_back(otherLayer); }
-		void attachOutput(std::shared_ptr<NeuronLayer<ScalarType>> const & otherLayer) final { _attachedOutputLayers.push_back(otherLayer); }
+		virtual void attachInput(std::shared_ptr<NeuronLayer<ScalarType>> const & otherLayer) final { _attachedInputLayers.push_back(otherLayer); }
+		virtual void attachOutput(std::shared_ptr<NeuronLayer<ScalarType>> const & otherLayer) final { _attachedOutputLayers.push_back(otherLayer); }
 	protected:
 		bool _isComputed;
 		void setComputed(bool computed) { _isComputed = computed; }
