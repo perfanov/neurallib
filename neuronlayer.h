@@ -1,7 +1,3 @@
-/*
-	Interface for a neural layer class. Contains necessary methods for training and computing a simple backpropagation network.
-*/
-
 #pragma once
 
 #include <future>

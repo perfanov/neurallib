@@ -1,7 +1,8 @@
+#include <iostream>
+
 #include "gtest.h"
 #include "neuraldata.h"
 #include "simpleneurons.h"
-#include <iostream>
 
 TEST(GeneralTests, GTestSanity) {
 	EXPECT_EQ(0, 0);
@@ -114,5 +115,15 @@ TEST(NeuralData, ReadWriteByCounting)
 
 TEST(SimpleNeurons, ConstantNeuron)
 {
-	ConstantNeuron<int> singleNeuron(myData);
+	std::vector<unsigned> dimSizes = { 20 };
+	NeuralData<char> myData(dimSizes);
+
+	std::string inStr("ConstantNeuron");
+	for(unsigned i = 0; i < inStr.size(); ++i)
+		myData({ i }) = inStr[i];
+
+	ConstantNeuron<char> singleNeuron(myData);
+	auto outputPtr = singleNeuron.compute();
+	ASSERT_NE(nullptr, outputPtr.get());
+	ASSERT_EQ(myData, *outputPtr.get());
 }
