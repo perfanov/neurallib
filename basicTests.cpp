@@ -1,5 +1,6 @@
 #include "gtest.h"
-#include "neuraldata.tcc"
+#include "neuraldata.h"
+#include "simpleneurons.h"
 
 TEST(GeneralTests, GTestSanity) {
 	EXPECT_EQ(0, 0);
@@ -43,4 +44,8 @@ TEST(NeuralData, DimensionsMismatchAssert) {
 		},
 		".*"
 	);
+}
+
+TEST(SimpleNeurons, ConstantNeuron) {
+
 }

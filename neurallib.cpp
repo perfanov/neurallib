@@ -1,2 +1,2 @@
-#include "neuraldata.tcc"
+#include "neuraldata.h"
 #include "neuronlayer.h"
