@@ -1,22 +1,25 @@
+/*
+	Interface for a neural layer class. Contains necessary methods for training and computing a simple backpropagation network.
+*/
+
 #pragma once
 
-#include <future>
+#include<memory>
 
 #include "neuraldata.h"
 
 template<class ScalarType>
 class NeuronLayer
 {
-	// We want to not fill the call stack too much, so we don't want recursion. We'll try this by overloading with a lot of sleeping threads.
-	// These threads will wake up as their compute input data becomes available.
-	// In the future, it could be done with a thread pool - carousel.
-
 	// The execution model is envisioned to be the following:
 	// 1. A new session is created; all depended on futures are cleared.
 	// 2. Each neuron layer finds out its depth and how many layers it counts on.
 	// 3. A task agent will start calling neurons that have 0 unfulfilled dependencies, in order of depth.
+
+	// As a hypothetical musing, this class could be inherited by wrappers of CuDNN,
+	// as long as we are using a gpu-template specialization of NeuralData<GpuDouble>, with different accessors, custom construct/destruct etc.
 	public:
-		bool isComputed() { return _isComputed; }
+		inline bool isComputed() { return _isComputed; }
 
 		// If the neuron does not have enough data, it will return an empty shared_ptr.
 		virtual std::shared_ptr<NeuralData<ScalarType>> compute() = 0;
